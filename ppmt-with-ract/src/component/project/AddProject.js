@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect, Connect } from "react-redux";
+import { connect } from "react-redux";
 import { CreatePeoject } from "../../actions/ProjectAction";
 
 class AddProject extends Component {
@@ -9,15 +9,31 @@ class AddProject extends Component {
 
     this.state = {
       projectName: "",
-      projectIdentifier: "abcd",
+      projectIdentifier: "",
       projectDesc: "",
       startDate: "",
       endDate: "",
+      errors: {},
     };
 
     this.onChage = this.onChage.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  // Life cycle hooks
+  // Commented code is for older version
+  /* componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  } */
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.errors !== prevState.errors) {
+      return { errors: nextProps.errors };
+    }
+    return null;
   }
 
   onChage(e) {
@@ -35,6 +51,7 @@ class AddProject extends Component {
       projectDesc: this.state.projectDesc,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
+      errors: this.state.errors,
     };
 
     console.log(newProject);
@@ -43,8 +60,18 @@ class AddProject extends Component {
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
-      <div className="project">
+      <div className=" container project">
+        {/* In this code, errors is checked for truthiness and then Object.keys(errors).
+        length is checked to see if there are any errors in the object. If there are, the <div> with the error message is rendered. */}
+        <div className="col-md-8">
+          {errors && Object.keys(errors).length > 0 && (
+            <div className="alert alert-danger">{errors.projectName}</div>
+          )}
+        </div>
+
         <div className="register">
           <div className="container">
             <div className="row">
@@ -73,7 +100,6 @@ class AddProject extends Component {
                       name="projectIdentifier"
                       value={this.state.projectIdentifier}
                       onChange={this.onChage}
-                      disabled
                     />
                   </div>
                   <div className="form-group">
@@ -122,6 +148,11 @@ class AddProject extends Component {
 
 AddProject.propTypes = {
   CreatePeoject: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-export default connect(null, { CreatePeoject })(AddProject);
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { CreatePeoject })(AddProject);
