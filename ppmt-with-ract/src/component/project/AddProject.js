@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect, Connect } from "react-redux";
+import { CreatePeoject } from "../../actions/ProjectAction";
 
 class AddProject extends Component {
   constructor() {
@@ -6,7 +9,7 @@ class AddProject extends Component {
 
     this.state = {
       projectName: "",
-      projectIdentifier: "",
+      projectIdentifier: "abcd",
       projectDesc: "",
       startDate: "",
       endDate: "",
@@ -35,6 +38,8 @@ class AddProject extends Component {
     };
 
     console.log(newProject);
+
+    this.props.CreatePeoject(newProject);
   }
 
   render() {
@@ -115,4 +120,8 @@ class AddProject extends Component {
   }
 }
 
-export default AddProject;
+AddProject.propTypes = {
+  CreatePeoject: PropTypes.func.isRequired,
+};
+
+export default connect(null, { CreatePeoject })(AddProject);
