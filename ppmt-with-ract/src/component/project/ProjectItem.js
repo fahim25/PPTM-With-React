@@ -19,19 +19,19 @@ class ProjectItem extends Component {
               </div>
               <div className="col-md-4 d-none d-lg-block">
                 <ul className="list-group">
-                  <a href="#">
+                  <a href="/">
                     <li className="list-group-item board">
                       <i className="fa fa-flag-checkered pe-1">
                         Project Board{" "}
                       </i>
                     </li>
                   </a>
-                  <a href="#">
+                  <a href="/">
                     <li className="list-group-item update">
                       <i className="fa fa-edit pe-1">Update Project Info</i>
                     </li>
                   </a>
-                  <a href="">
+                  <a href="/">
                     <li className="list-group-item delete">
                       <i className="fa fa-minus-circle pe-1">Delete Project</i>
                     </li>
