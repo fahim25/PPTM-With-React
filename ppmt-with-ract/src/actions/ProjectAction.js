@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS } from "./Types";
+import { GET_ERRORS, GET_PROJECTS } from "./Types";
 import { Navigate } from "react-router-dom";
 
 export const CreatePeoject = (project) => async (dispatch) => {
@@ -14,3 +14,13 @@ export const CreatePeoject = (project) => async (dispatch) => {
     });
   }
 };
+
+const GetProjects = () => async (dispatch) => {
+  const res = await axios.get(`http://localhost:8080/api/project/allProject`);
+  dispatch({
+    type: GET_PROJECTS,
+    payload: res.data,
+  });
+};
+
+export default GetProjects;
