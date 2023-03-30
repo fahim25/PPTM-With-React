@@ -9,17 +9,16 @@ class Dashboard extends Component {
   /* Life Cycle Hooks */
   componentDidMount() {
     this.props.GetProjects();
-    // console.log(project);
   }
 
   render() {
-    const projects = {
+    /* const projects = {
       projectName: "Project Name",
       projectDesc: "Project Desc",
       projectIdentifier: "Project Identifier",
-    };
+    }; */
 
-    // const { projects } = this.props.project;
+    const { projects } = this.props.project;
 
     return (
       <div>
@@ -36,10 +35,10 @@ class Dashboard extends Component {
                 <hr />
 
                 {/* Project Item */}
-                <ProjectItem project={projects} />
-                {/* {projects.map((project) => (
+                {/* <ProjectItem project={projects} /> */}
+                {projects.map((project) => (
                   <ProjectItem key={project.id} project={project} />
-                ))} */}
+                ))}
               </div>
             </div>
           </div>
