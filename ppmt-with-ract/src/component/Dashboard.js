@@ -12,12 +12,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    /* const projects = {
-      projectName: "Project Name",
-      projectDesc: "Project Desc",
-      projectIdentifier: "Project Identifier",
-    }; */
-
     const { projects } = this.props.project;
 
     return (
