@@ -58,7 +58,7 @@ class AddProject extends Component {
 
     console.log(newProject);
 
-    this.props.CreatePeoject(newProject);
+    this.props.CreatePeoject(newProject, this.props.history);
   }
 
   render() {
