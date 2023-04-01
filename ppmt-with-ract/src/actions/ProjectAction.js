@@ -1,18 +1,11 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECTS } from "./Types";
-import { Navigate, useNavigate } from "react-router-dom";
+import { GET_ERRORS, GET_PROJECTS, GET_PROJECT } from "./Types";
 
 export const CreatePeoject = (project, history) => async (dispatch) => {
-  // const navigate = useNavigate();
-
   try {
     const res = await axios.post(`http://localhost:8080/api/project`, project);
-    // .then(() => navigate("/dashboard"));
     history.push("/dashboard");
-    // navigate("/dashboard");
-    // <Navigate to="/dashboard" />;
   } catch (err) {
-    console.log(err);
     dispatch({
       type: GET_ERRORS,
       payload: err.res.data,
@@ -20,15 +13,7 @@ export const CreatePeoject = (project, history) => async (dispatch) => {
   }
 };
 
-/* export const GetProjects = () => async (dispatch) => {
-  const res = await axios.get("http://localhost:8080/api/project/allProject");
-  dispatch({
-    type: GET_PROJECTS,
-    payload: res.data,
-  });
-}; */
-
-export const getProjects = () => async (dispatch) => {
+export const GetProjects = () => async (dispatch) => {
   const res = await axios.get("http://localhost:8080/api/project/allProject");
   dispatch({
     type: GET_PROJECTS,
@@ -36,10 +21,10 @@ export const getProjects = () => async (dispatch) => {
   });
 };
 
-/* export const GetProjects = () => async (dispatch) => {
-  const res = await axios.get(`http://localhost:8080/api/project/allProject`);
+export const GetProject = (id,history) => async (dispatch) => {
+  const res = await axios.get(`http://localhost:8080/api/project/${id}`);
   dispatch({
-    type: GET_PROJECTS,
+    type: GET_PROJECT,
     payload: res.data,
   });
-}; */
+};
