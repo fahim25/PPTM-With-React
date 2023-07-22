@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { GetProject, CreatePeoject } from "../../actions/ProjectAction";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classNames from "classnames";
 
 class UpdateProject extends Component {
   constructor() {
@@ -66,7 +65,6 @@ class UpdateProject extends Component {
     this.props.CreatePeoject(updateProject, this.props.history);
   }
   
-
   render() {
     return (
       <div className="project">
@@ -75,7 +73,7 @@ class UpdateProject extends Component {
             <div className="col-md-8 m-auto">
               <h5 className="display-4 text-center">Update Project form</h5>
               <hr />
-              <form>
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group mt-3">
                   <input
                     type="text"
