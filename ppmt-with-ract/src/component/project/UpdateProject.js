@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { GetProject, CreatePeoject } from "../../actions/ProjectAction";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import classnames from "classnames";
 
 class UpdateProject extends Component {
   constructor() {
@@ -14,6 +15,7 @@ class UpdateProject extends Component {
       projectDesc: "",
       startDate: "",
       endDate: "",
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
@@ -22,6 +24,10 @@ class UpdateProject extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+
     const {
       id,
       projectName,
@@ -64,8 +70,10 @@ class UpdateProject extends Component {
 
     this.props.CreatePeoject(updateProject, this.props.history);
   }
-  
+
   render() {
+    const { errors } = this.state;
+
     return (
       <div className="project">
         <div className="container">
@@ -77,12 +85,18 @@ class UpdateProject extends Component {
                 <div className="form-group mt-3">
                   <input
                     type="text"
-                    className="form-control form-control-lg "
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.projectName,
+                    })}
+                    // className="form-control form-control-lg"
                     name="projectName"
                     placeholder="Project Name"
                     value={this.state.projectName}
                     onChange={this.onChange}
                   />
+                  {errors.projectName && (
+                    <div className="invalid-feedback">{errors.projectName}</div>
+                  )}
                 </div>
                 <div className="form-group mt-3">
                   <input
@@ -141,10 +155,12 @@ UpdateProject.propTypes = {
   GetProject: PropTypes.func.isRequired,
   CreatePeoject: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   project: state.project.project,
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { GetProject, CreatePeoject })(
