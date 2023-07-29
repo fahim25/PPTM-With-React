@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECTS, GET_PROJECT } from "./Types";
+import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DEL_PROJECT } from "./Types";
 
 export const CreatePeoject = (project, history) => async (dispatch) => {
   try {
@@ -32,3 +32,12 @@ export const GetProject = (id, history) => async (dispatch) => {
     history.push("/dashboard");
   }
 };
+
+export const deleteProject = id => async dispatch =>{
+  await axios.delete(`http://localhost:8080/api/project/${id}`)
+  dispatch({
+    type: DEL_PROJECT,
+    payload: id,
+  });
+}
+
