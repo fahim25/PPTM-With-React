@@ -21,7 +21,7 @@ const ProjectReducer = (state = initialState, action) => {
       return {
         ...state,
         projects: state.projects.filter(
-          (propject) => propject.projectIdentifier != action.payload
+          (propject) => propject.projectIdentifier !== action.payload
         ),
       };
 

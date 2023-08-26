@@ -3,7 +3,8 @@ import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DEL_PROJECT } from "./Types";
 
 export const CreatePeoject = (project, history) => async (dispatch) => {
   try {
-    const res = await axios.post(`/api/project`, project);
+    // const res = await axios.post(`/api/project`, project);
+    await axios.post(`/api/project`, project);
     history.push("/dashboard");
   } catch (err) {
     dispatch({
