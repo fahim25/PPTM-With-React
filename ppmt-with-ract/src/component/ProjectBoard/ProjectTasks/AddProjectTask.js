@@ -1,48 +1,71 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { addProjectTask } from "../../../actions/BacklogAction";
+import PropTypes from "prop-types";
 
 class AddProjectTask extends Component {
+  constructor(props) {
+    super(props);
+    const { id } = this.props.match.params;
+
+    this.state = {
+      summary: "",
+      acceptanceCriteria: "",
+      status: "",
+      priority: "3",
+      dueDate: null,
+      projectIdentifier: id,
+      erros: {},
+    };
+  }
+
   render() {
     const { id } = this.props.match.params;
 
     return (
       <div className="add-PBI">
         <div className="container">
-          <div className="row">
+          <div className="row gy-3">
             <div className="col-md-8 m-auto">
-              <Link to={`/projectBoard/${id}`} className="btn btn-light">
+              <Link to={`/projectBoard/${id}`} className="btn btn-info">
                 Back to Project Board
               </Link>
               <h4 className="display-4 text-center">Add Project Task</h4>
               <p className="lead text-center">Project Name + Project Code</p>
               <form>
-                <div className="form-group">
+                <div className="form-group py-2">
                   <input
                     type="text"
                     className="form-control form-control-lg"
                     name="summary"
                     placeholder="Project Task summary"
+                    value={this.state.summary}
                   />
                 </div>
-                <div className="form-group">
+                <div className="form-group py-2">
                   <textarea
                     className="form-control form-control-lg"
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
+                    value={this.state.acceptanceCriteria}
                   />
                 </div>
                 <h6>Due Date</h6>
-                <div className="form-group">
+                <div className="form-group py-2">
                   <input
                     type="date"
                     className="form-control form-control-lg"
                     name="dueDate"
+                    value={this.state.dueDate}
                   />
                 </div>
-                <div className="form-group">
+                <div className="form-group py-2">
                   <select
                     className="form-control form-control-lg"
                     name="priority"
+                    value={this.state.priority}
                   >
                     <option value={0}>Select Priority</option>
                     <option value={1}>High</option>
@@ -51,10 +74,11 @@ class AddProjectTask extends Component {
                   </select>
                 </div>
 
-                <div className="form-group">
+                <div className="form-group py-2">
                   <select
                     className="form-control form-control-lg"
                     name="status"
+                    value={this.state.status}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>
@@ -76,4 +100,8 @@ class AddProjectTask extends Component {
   }
 }
 
-export default AddProjectTask;
+AddProjectTask.PropTypes = {
+  addProjectTask: PropTypes.func.isRequired,
+};
+
+export default connect(null, { addProjectTask })(AddProjectTask);
