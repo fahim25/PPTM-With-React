@@ -5,11 +5,17 @@ class Backlog extends Component {
   render() {
     const { project_tasks_prop } = this.props;
 
+    console.log("p task:-" + project_tasks_prop);
+
     const tasks = project_tasks_prop.map((project_task) => (
       <ProjectTask key={project_task.id} project_task={project_task} />
     ));
 
-    // console.log("task" + tasks);
+    // {projects.map((project_task) => (
+    //   <ProjectTask key={project_task.id} project_task={project_task} />
+    // ))}
+
+    console.log("task:-" + tasks);
     return (
       <div className="container">
         <div className="row">
@@ -20,10 +26,10 @@ class Backlog extends Component {
               </div>
             </div>
             {tasks}
-            {/* Project Task */}
-
-            {/* insert project task here */}
-            {/* <ProjectTask /> */}
+            {/* <ProjectTask key={tasks.id} project_task={tasks} /> */}
+            {
+              // insert tasks here
+            }
           </div>
           <div className="col-md-4">
             <div className="card text-center mb-2">
@@ -31,8 +37,10 @@ class Backlog extends Component {
                 <h3>In Progress</h3>
               </div>
             </div>
-
-            {/* Project Task */}
+            {
+              //  <!-- SAMPLE PROJECT TASK STARTS HERE -->
+              //         <!-- SAMPLE PROJECT TASK ENDS HERE -->
+            }
           </div>
           <div className="col-md-4">
             <div className="card text-center mb-2">
@@ -40,7 +48,10 @@ class Backlog extends Component {
                 <h3>Done</h3>
               </div>
             </div>
-            {/* Project Task */}
+            {
+              // <!-- SAMPLE PROJECT TASK STARTS HERE -->
+              // <!-- SAMPLE PROJECT TASK ENDS HERE -->
+            }
           </div>
         </div>
       </div>

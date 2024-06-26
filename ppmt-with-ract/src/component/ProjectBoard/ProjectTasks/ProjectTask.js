@@ -3,9 +3,6 @@ import React, { Component } from "react";
 class ProjectTask extends Component {
   render() {
     const { project_task } = this.props;
-
-    // console.log(project_task);
-
     return (
       <div className="card mb-1 bg-light">
         <div className="card-header text-primary">
@@ -27,5 +24,4 @@ class ProjectTask extends Component {
     );
   }
 }
-
 export default ProjectTask;
